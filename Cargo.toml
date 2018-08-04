@@ -1,0 +1,12 @@
+[package]
+authors = ["eeeeeta <eeeeeta@users.noreply.github.com>"]
+name = "netdata-irker"
+version = "0.1.0"
+
+[dependencies]
+failure = "0.1"
+serde = "1.0"
+serde_derive = "1.0"
+structopt = "0.2"
+serde_json = "1.0"
+toml = "0.4.6"
