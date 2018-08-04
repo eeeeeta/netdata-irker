@@ -16,6 +16,7 @@ pub struct Config {
     server: String,
     destinations: Vec<String>,
     ping: Option<String>,
+    show_hostname: bool
 }
 
 #[derive(StructOpt)]
@@ -72,9 +73,15 @@ fn main() -> Result<(), Error> {
     else {
         "".into()
     };
+    let hostname = if cfg.show_hostname {
+        format!("[\x02\x0306{}\x0f] ", args.host)
+    }
+    else {
+        "".into()
+    };
     let body = format!(
-        "{}[\x02\x03{}{}\x0f] \x02{}\x0f for \x02{}\x0f at \x02\x03{}{}\x0f\x0315 -- desc: {} \x0f[from \x02\x03{}{}\x0f ({})]",
-        ping, s2c(&args.status), args.status, args.name, args.chart, s2c(&args.status), args.value_string,
+        "{}{}[\x02\x03{}{}\x0f] \x02{}\x0f for \x02{}\x0f at \x02\x03{}{}\x0f\x0315 -- desc: {} \x0f[from \x02\x03{}{}\x0f ({})]",
+        ping, hostname, s2c(&args.status), args.status, args.name, args.chart, s2c(&args.status), args.value_string,
         args.info, s2c(&args.old_status), args.old_status, args.old_value_string
     );
     let notif = IrkerNotification {
