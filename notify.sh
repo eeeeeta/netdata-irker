@@ -1,3 +1,3 @@
 #!/bin/sh
 
-/usr/bin/netdata-irker -c /etc/netdata-irker.toml "$*"
+/usr/bin/netdata-irker --config /etc/netdata-irker.toml "$@"
